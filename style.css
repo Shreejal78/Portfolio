@@ -19,6 +19,8 @@ html {
 * {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
+  user-select: none;
+  -moz-user-select: none;
 }
 
 header {
@@ -168,7 +170,7 @@ pre {
 }
 #about,
 #contact,
-#project{
+#project {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -377,4 +379,108 @@ pre {
   box-shadow:
     0 0 10px rgb(255, 77, 0),
     0 0 20px rgb(158, 0, 0);
+}
+
+.cards {
+  display: flex;
+  gap: 25px;
+  position: relative;
+  justify-content: center;
+  width: 80%;
+  margin-top: 50px;
+  height: 70%;
+}
+
+.Pcard {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #2a2d35;
+  border: 2px solid #ffffff3c;
+  height: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-box-reflect:
+        below 5px
+        linear-gradient(
+          transparent 70%,
+          rgba(255,255,255,.15)
+        );
+  width: 26%;
+  align-items: center;
+  overflow: hidden;
+  transition: all 200ms ease;
+}
+.Pcard:hover{
+  cursor: pointer;
+}
+
+.projectPreview {
+  height: 50%;
+  width: 100%;
+}
+
+.projectPreview img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+
+.cardTitle {
+  font-size: 28px;
+  margin: 20px 0;
+  font-weight: 700;
+  
+}
+#fb{
+  background:linear-gradient(90deg,#7DD3FC,#818CF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#calc{
+  background:linear-gradient(90deg,#FDE68A,#F59E0B);;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#todo{
+  background:linear-gradient(90deg,#6EE7B7,#14B8A6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cardDes {
+  text-align: center;
+  margin: 10px;
+}
+
+.cardBtn{
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  gap: 20px;
+}
+.cBtn{
+  background: none;
+  border: 2px solid rgb(255, 255, 255);
+  padding: 3px;
+  border-radius: 50%;
+}
+.cBtn:hover{
+  cursor: pointer;
+  border:2px solid #00f2fe;
+  box-shadow: 0 0 12px #00f2fe;
+}
+.cBtn:active{
+  scale: 0.95;
+}
+#pre{
+  transform: rotate(-90deg);
+}
+#nxt{
+  transform: rotate(90deg);
 }
