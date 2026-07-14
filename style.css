@@ -8,9 +8,8 @@ body,
 html {
   margin: 0;
   padding: 0;
-  
-    scroll-behavior: smooth;
 
+  scroll-behavior: smooth;
 }
 #home {
   background: url("bg.png");
@@ -152,11 +151,10 @@ pre {
 #skill {
   border-right: 8px solid white;
   animation: blink 0.8s infinite;
-    background: linear-gradient(90deg,#4facfe,#00f2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 @keyframes blink {
@@ -169,7 +167,8 @@ pre {
   height: 100%;
 }
 #about,
-#contact {
+#contact,
+#project{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -258,21 +257,23 @@ pre {
   font-size: 24px;
   font-weight: 600;
 }
-.segImg{
+.segImg {
   display: flex;
   position: absolute;
   bottom: 40px;
   gap: 10px;
 }
-.segImg img{
+.segImg img {
   height: 50px;
   width: 50px;
   transition: all 250ms ease;
 }
-.segImg img:hover{
+.segImg img:hover {
   cursor: pointer;
   transform: translateY(-5px) scale(1.05);
-  filter: drop-shadow(0px 8px 5px rgb(255, 255, 255));
+  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.35))
+    drop-shadow(0 0 30px rgba(239, 68, 68, 0.22))
+    drop-shadow(0 0 60px rgba(239, 68, 68, 0.12));
 }
 
 #contact-form {
@@ -303,7 +304,7 @@ pre {
   border-radius: 12px;
   padding: 16px 18px;
   font-size: 16px;
-  transition:all 0.25s ease;
+  transition: all 0.25s ease;
   resize: none;
   font-family: inherit;
 }
@@ -352,8 +353,8 @@ pre {
   font-size: 18px;
 }
 
-
-#navPre,#navNext{
+#navPre,
+#navNext {
   position: absolute;
   padding: 0 2px;
   border-radius: 50%;
@@ -362,16 +363,18 @@ pre {
   bottom: 50px;
 }
 
-#navPre{
+#navPre {
   right: 50px;
   border: 2px solid lime;
-  box-shadow: 0 0 10px lime,
-  0 0 20px rgb(5, 158, 0);
+  box-shadow:
+    0 0 10px lime,
+    0 0 20px rgb(5, 158, 0);
 }
 
-#navNext{
+#navNext {
   left: 50px;
   border: 2px solid rgb(255, 119, 0);
-  box-shadow: 0 0 10px rgb(255, 77, 0),
-  0 0 20px rgb(158, 0, 0);
+  box-shadow:
+    0 0 10px rgb(255, 77, 0),
+    0 0 20px rgb(158, 0, 0);
 }
