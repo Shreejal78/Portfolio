@@ -8,11 +8,10 @@ body,
 html {
   margin: 0;
   padding: 0;
-
   scroll-behavior: smooth;
 }
 #home {
-  background: url("bg.png");
+  background: url("images/bg.png");
   background-size: cover;
   background-position: center;
 }
@@ -88,9 +87,26 @@ header {
 }
 
 .description {
+  display: flex;
+  flex-direction: column;
   margin-top: 60px;
-  margin-left: 0px;
+  margin-left: 80px;
 }
+.description p{ 
+  margin: 0 ;
+}
+.greet{
+  margin:0 0 40px 0 !important;
+
+}
+.devDescription{
+  overflow-wrap: break-word;
+  width: 500px;
+  line-height: 32px;
+  text-align:inherit;
+  margin: 40px 0 0 0 !important;
+}
+
 .logo::before {
   content: "";
   display: inline-block;
@@ -106,23 +122,23 @@ header {
   cursor: pointer;
 }
 #li::before {
-  background-image: url("liLogo.png");
+  background-image: url("images/liLogo.png");
 }
 #git::before {
-  background-image: url("gitLogo.png");
+  background-image: url("images/gitLogo.png");
 }
 
 #ig::before {
-  background-image: url("igLogo.png");
+  background-image: url("images/igLogo.png");
 }
 #git:hover::before {
-  background-image: url("H_gitLogo.png");
+  background-image: url("images/H_gitLogo.png");
 }
 #ig:hover::before {
-  background-image: url("H_igLogo.png");
+  background-image: url("images/H_igLogo.png");
 }
 #li:hover::before {
-  background-image: url("H_liLogo.png");
+  background-image: url("images/H_liLogo.png");
 }
 
 .subNav {
@@ -146,12 +162,14 @@ header {
   width: 105%;
 }
 
-pre {
+.greet,.devDescription {
   font-size: 24px;
   font-weight: 550;
 }
 #skill {
   border-right: 8px solid white;
+  height: 90px;
+  width: fit-content;
   animation: blink 0.8s infinite;
   background: linear-gradient(90deg, #4facfe, #00f2fe);
   -webkit-background-clip: text;
@@ -433,26 +451,12 @@ pre {
   font-size: 28px;
   margin: 20px 0;
   font-weight: 700;
-  
-}
-#fb{
   background:linear-gradient(90deg,#7DD3FC,#818CF8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-#calc{
-  background:linear-gradient(90deg,#FDE68A,#F59E0B);;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-#todo{
-  background:linear-gradient(90deg,#6EE7B7,#14B8A6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+
 .cardDes {
   text-align: center;
   margin: 10px;
