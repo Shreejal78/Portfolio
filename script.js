@@ -1,4 +1,3 @@
-
 const skill = document.getElementById("skill");
 
 let wordIndex = 0;
@@ -6,16 +5,16 @@ let charIndex = 0;
 let deleting = false;
 let text = null;
 async function type() {
-  if(!text){
-    let textFromDB =await fetch("getSkills.php")
-    .then((res) => res.text())
-    .then((data) => data);
-    console.log(textFromDB)
+  if (!text) {
+    let textFromDB = await fetch("getSkills.php")
+      .then((res) => res.text())
+      .then((data) => data);
+    console.log(textFromDB);
 
     text = textFromDB
-    .split("#")
-    .filter((item) => item.trim())
-    .map((item) => item.trim().replace(/\.+$/, "").toUpperCase() + ".");
+      .split("#")
+      .filter((item) => item.trim())
+      .map((item) => item.trim().replace(/\.+$/, "").toUpperCase() + ".");
   }
 
   const currentWord = text[wordIndex];
@@ -99,6 +98,32 @@ next.onclick = () => {
 };
 
 sliderShow();
+
+const loginForm = document.querySelector(".loginForm");
+const registerForm = document.querySelector(".registerForm");
+document.querySelectorAll(".closePopUp").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".loginPopUp").style.display = "none";
+    loginForm.reset();
+    registerForm.reset();
+  });
+});
+
+document.getElementById("login").addEventListener("click", () => {
+  document.querySelector(".loginPopUp").style.display = "flex";
+});
+
+document.getElementById("openLogin").addEventListener("click", () => {
+  registerForm.style.display = "none";
+  registerForm.reset();
+  loginForm.style.display = "flex";
+});
+
+document.getElementById("openRegister").addEventListener("click", () => {
+  loginForm.style.display = "none";
+  loginForm.reset();
+  registerForm.style.display = "flex";
+});
 
 (function () {
   var form = document.getElementById("contact-form");

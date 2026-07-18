@@ -10,13 +10,56 @@
 </head>
 
 <body>
+   <!-- THIS IS LOGIN POPUP -->
+
+   <div class="loginPopUp">
+    <form action="login_process.php" method="POST" class="loginForm">
+      <h1>Log in</h1>
+      <div class="group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="group">
+      <label for="pass">Password:</label>
+      <input type="password" id="pass" name="password" required>
+    </div>
+    <button type="submit" id="loginBtn">Login</button>
+    <p id="openRegister" class="changeForm">Don't have an account?</p>
+    <p class="closePopUp" title="Close">×</p>
+
+    </form>
+
+    <form action="register_process.php" method="POST" class="registerForm">
+      <h1>Quick Register</h1>
+      <div class="group">
+      <label for="r_username">Username:</label>
+      <input type="text" id="r_username" name="username" required>
+    </div>
+    <div class="group">
+      <label for="r_email">Email:</label>
+      <input type="email" id="r_email" name="usr_email" required>
+    </div>
+    <div class="group">
+      <label for="r_pass">Password:</label>
+      <input type="password" id="r_pass" name="password" required>
+    </div>
+    <button type="submit" id="registerBtn">Register</button>
+    <p id="openLogin" class="changeForm">Already have an account?</p>
+    <p class="closePopUp" title="Close">×</p>
+
+    </form>
+   </div>
+
+
+
+
   <div id="home" class="pageSegments">
     <header>
       <p class="name">
         <?php
         require 'conn.php';
 
-        $sql = "SELECT username FROM user";
+        $sql = "SELECT username FROM admin_details";
         $result = $conn->query($sql);
         $words;
         while ($row = $result->fetch_assoc()) {
@@ -37,6 +80,7 @@
         <a target="_blank" href="https://github.com/shreejal78" class="logo" id="git"></a>
         <a target="_blank" href="https://www.linkedin.com/in/shreejal-bro-760199422/" class="logo" id="li"></a>
         <a target="_blank" href="https://www.instagram.com/shreejal.twayana/" class="logo" id="ig"></a>
+        <a class="subNav" id="login" href="#">Login</a>
       </div>
     </header>
     <div class="main">
@@ -50,7 +94,7 @@
           <?php
           require 'conn.php';
 
-          $sql = "SELECT description FROM user";
+          $sql = "SELECT description FROM admin_details";
           $result = $conn->query($sql);
           while ($row = $result->fetch_assoc()) {
             echo $row['description'];
@@ -84,6 +128,10 @@
               <p class="cardDes">
                 <?php echo $row['description']; ?>
               </p>
+              <div class="projectLinks">
+                <a target="_blank" href="<?php echo $row['github'] ?>" class="git">GitHub</a>
+                <a target="_blank" href="<?php echo $row['live'] ?>" class="live">Live</a>
+              </div>
             </div>
             <?php
             }
