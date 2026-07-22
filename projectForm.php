@@ -1,3 +1,5 @@
+<?php require_once 'auth.php'; ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -19,6 +21,21 @@
       font-family: "Poppins", sans-serif;
     }
 
+    #logOut {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 2px dashed orangered;
+      background: red;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 5px 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
     body {
       min-height: 100vh;
       display: flex;
@@ -31,6 +48,38 @@
         linear-gradient(135deg, #0f172a, #111827, #0b1120);
       padding: 30px;
     }
+    input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    color: #e5e7eb;
+    background: #1f2937;
+    border: 2px dashed #4b5563;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #8b5cf6;
+    background: #273244;
+}
+
+input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #8b5cf6;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #7c3aed;
+}
 
     .container,
     .display {
@@ -91,7 +140,7 @@
     input,
     textarea {
       width: 100%;
-      border: none;
+      border: 2px solid #1f293755 ;
       outline: none;
       background: #1f2937;
       color: #fff;
@@ -100,6 +149,10 @@
       border: 1px solid transparent;
       transition: 0.3s;
       font-size: 15px;
+    }
+
+    input:hover,textarea:hover{
+      border-color: #0688d4;
     }
 
     textarea {
@@ -285,23 +338,31 @@
 </head>
 
 <body>
+  <button onclick="window.location.href = 'logout.php'" id="logOut">Log Out</button>
+
   <a href="index.php" class="homePage topUrl">Home</a>
   <a href="form.php" class="nxtForm topUrl">Switch Form</a>
   <div class="editPopUp">
-    <form action="editProject.php" method="POST" class="editForm">
+    <form action="editProject.php" method="POST" enctype="multipart/form-data" class="editForm">
 
       <h1 class="title">Edit Project</h1>
 
       <p class="subtitle">Edit your portfolio</p>
       <input type="hidden" name="e_id" id="e_id">
+
+      <div class="group">
+        <label for="editImg">Project Image Path</label>
+        <input id="editImg" type="file" name="e_image" accept="image/*" placeholder="Edi Image Path" required/>
+      </div>
+
       <div class="group">
         <label for="editTitle">Project Title</label>
         <input id="editTitle" type="text" name="e_title" placeholder="Edit project title" required />
       </div>
 
       <div class="group">
-        <label for="editImg">Project Image Path</label>
-        <input id="editImg" type="text" name="e_image" placeholder="Edi Image Path" required />
+        <label for="editDes">Project Description</label>
+        <textarea id="editDes" maxlength="120" name="e_des" placeholder="Edit description Here..." required></textarea>
       </div>
 
       <div class="group">
@@ -314,10 +375,6 @@
         <input type="url" id="editLiveLink" name="e_live_url" placeholder="Edit Hosted Web Link..." required />
       </div>
 
-      <div class="group">
-        <label for="editDes">Project Description</label>
-        <textarea id="editDes" maxlength="120" name="e_des" placeholder="Edit description Here..." required></textarea>
-      </div>
 
       <button type="submit" id="updateProject">🔄 Update Project</button>
     </form>
@@ -351,11 +408,16 @@
     ?>
   </div>
   <div class="container">
-    <form action="insertProject.php" method="POST" id="insForm">
+    <form action="insertProject.php" method="POST" enctype="multipart/form-data" id="insForm">
 
       <h1 class="title">Project Form</h1>
 
       <p class="subtitle">Add a new project to your portfolio</p>
+
+      <div class="group">
+        <label for="image">Project Image</label>
+        <input type="file" id="image" name="image" placeholder="Image Path"  accept="image/*" required />
+      </div>
 
       <div class="group">
         <label for="title">Project Title</label>
@@ -363,8 +425,9 @@
       </div>
 
       <div class="group">
-        <label for="image">Project Image Path</label>
-        <input type="text" id="image" name="image" placeholder="Image Path" value="images/projectImages/" required />
+        <label for="des">Project Description</label>
+        <textarea id="des" maxlength="120" name="des" placeholder="Write a short description about the project..."
+          required></textarea>
       </div>
 
       <div class="group">
@@ -377,11 +440,6 @@
         <input type="url" id="liveLink" name="live_url" placeholder="Enter Hosted Web Link..." required />
       </div>
 
-      <div class="group">
-        <label for="des">Project Description</label>
-        <textarea id="des" maxlength="120" name="des" placeholder="Write a short description about the project..."
-          required></textarea>
-      </div>
 
       <button type="submit" id="done">🚀 Add Project</button>
     </form>
@@ -409,12 +467,12 @@
         popUp.style.display = 'flex'
         document.getElementById('e_id').value = project.dataset.id;
         document.getElementById('editTitle').value = project.querySelector('.projectTitle').innerText;
-        document.getElementById('editImg').value = project.querySelector('.projectImg').value;
         document.getElementById('editGitLink').value = project.querySelector('.project_git_url').value;
         document.getElementById('editLiveLink').value = project.querySelector('.project_live_url').value;
         document.getElementById('editDes').value = project.querySelector('.projectDes').innerText;
       })
     })
+
     popUp.addEventListener('click', (e) => {
       if (e.target.classList[0] == 'editPopUp') {
         popUp.style.display = 'none';

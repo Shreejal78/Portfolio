@@ -1,3 +1,7 @@
+<?php
+require_once 'auth.php';
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -167,36 +171,78 @@
       color: #5fcead;
       right: 20px;
     }
+
+    #logOut {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 2px dashed orangered;
+      background: red;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 5px 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
+  <button onclick="window.location.href = 'logout.php'" id="logOut">Log Out</button>
   <a href="index.php" class="homePage topUrl">Home</a>
   <a href="projectForm.php" class="nxtForm topUrl">Switch Form</a>
   <div class="form-box">
     <h1 class="title">Portfolio Form</h1>
 
     <p class="subtitle">Update your personal portfolio information</p>
-
+    <?php
+    require_once 'conn.php';
+    $sql = "SELECT * FROM admin_details";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 0) {
+      ?>
+      <input type="hidden" name="current_name" id="current_name" value="">
+      <input type="hidden" name="current_skills" id="current_skills" value="">
+      <input type="hidden" name="current_des" id="current_des" value="">
+      <?php
+    } else {
+      while ($row = $result->fetch_assoc()) {
+        ?>
+        <input type="hidden" name="current_name" id="current_name" value="<?php echo $row['username'];?>">
+        <input type="hidden" name="current_skills" id="current_skills" value="<?php echo $row['skills'];?>">
+        <input type="hidden" name="current_des" id="current_des" value="<?php echo $row['description'];?>">
+        <?php
+      }
+    }
+    ?>
     <form action="insert.php" method="POST">
       <div class="input-group">
         <label>Name</label>
-        <input type="text" name="name" placeholder="Enter your name" required />
+        <input id="inp_username" type="text" name="name" placeholder="Enter your name" required />
       </div>
 
       <div class="input-group">
         <label>Skills</label>
-        <input type="text" name="skills" placeholder="Seperate Skills with a [#]" required />
+        <input type="text" id="inp_skills" name="skills" placeholder="Seperate Skills with a [#]" required />
       </div>
 
       <div class="input-group">
         <label>Description</label>
-        <textarea name="des" placeholder="Write something about yourself..." required></textarea>
+        <textarea name="des" id="inp_des" placeholder="Write something about yourself..." required></textarea>
       </div>
 
       <button type="submit" id="done">Done</button>
     </form>
   </div>
+
+  <script>
+      document.getElementById('inp_username').value = document.getElementById('current_name').value
+      document.getElementById('inp_skills').value = document.getElementById('current_skills').value
+      document.getElementById('inp_des').value = document.getElementById('current_des').value
+
+  </script>
 </body>
 
 </html>

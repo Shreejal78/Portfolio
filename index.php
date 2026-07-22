@@ -10,47 +10,39 @@
 </head>
 
 <body>
-   <!-- THIS IS LOGIN POPUP -->
 
-   <div class="loginPopUp">
+<!-- LOADING SCREEN -->
+
+<div id="loaderContainer">
+    <iframe
+        id="loaderFrame"
+        src="loading.html"
+        frameborder="0"
+        scrolling="no">
+    </iframe>
+</div>
+  <!-- THIS IS LOGIN POPUP -->
+
+  <div class="loginPopUp">
     <form action="login_process.php" method="POST" class="loginForm">
       <h1>Log in</h1>
       <div class="group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-    </div>
-    <div class="group">
-      <label for="pass">Password:</label>
-      <input type="password" id="pass" name="password" required>
-    </div>
-    <button type="submit" id="loginBtn">Login</button>
-    <p id="openRegister" class="changeForm">Don't have an account?</p>
-    <p class="closePopUp" title="Close">×</p>
-
-    </form>
-
-    <form action="register_process.php" method="POST" class="registerForm">
-      <h1>Quick Register</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
       <div class="group">
-      <label for="r_username">Username:</label>
-      <input type="text" id="r_username" name="username" required>
-    </div>
-    <div class="group">
-      <label for="r_email">Email:</label>
-      <input type="email" id="r_email" name="usr_email" required>
-    </div>
-    <div class="group">
-      <label for="r_pass">Password:</label>
-      <input type="password" id="r_pass" name="password" required>
-    </div>
-    <button type="submit" id="registerBtn">Register</button>
-    <p id="openLogin" class="changeForm">Already have an account?</p>
-    <p class="closePopUp" title="Close">×</p>
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" name="password" required>
+      </div>
+      <button type="submit" id="loginBtn">Login</button>
+      <p class="closePopUp" title="Close">×</p>
 
     </form>
-   </div>
+
+  </div>
 
 
+  <!-- HOME -->
 
 
   <div id="home" class="pageSegments">
@@ -84,13 +76,12 @@
       </div>
     </header>
     <div class="main">
-      <div class="mainImg"><img src="images/avatar.png" alt="" /></div>
       <div class="description">
-        <p class="greet">Hi, I'm <?php echo $words[0];?>,</p>
-        <p class="mainDes">I'M A PROFICIENT</p>
-        <p class="mainDes" id="skill"></p>
+        <p class="greet reveal">Hi, I'm <?php echo $words[0]; ?>,</p>
+        <p class="mainDes reveal2">I'M A PROFICIENT</p>
+        <p class="mainDes reveal2" id="skill"></p>
 
-        <p class="devDescription">
+        <p class="devDescription reveal3">
           <?php
           require 'conn.php';
 
@@ -104,56 +95,49 @@
           ?>
         </p>
       </div>
+      <div class="mainImg"><img src="images/avatar.png" alt="" /></div>
     </div>
   </div>
 
   <div id="project" class="pageSegments">
     <a id="navPre" href="#home"><img src="images/upArrow.png" alt="" /></a>
     <a id="navNext" href="#about"><img src="images/downArrow.png" alt="" /></a>
-    <p class="title">Projects</p>
+    <p class="title reveal">Projects</p>
 
-    <div class="cards">
+    <div class="cards reveal2">
       <?php
-          require 'conn.php';
+      require 'conn.php';
 
-          $sql = "SELECT * FROM projects";
-          $result = $conn->query($sql);
-          while ($row = $result->fetch_assoc()) {
-            ?>
-            <div class="Pcard">
-              <div class="projectPreview">
-                <img src="<?php echo $row['img_path']; ?>" alt="" />
-              </div>
-              <p class="cardTitle"><?php echo strtoupper($row['title']); ?></p>
-              <p class="cardDes">
-                <?php echo $row['description']; ?>
-              </p>
-              <div class="projectLinks">
-                <a target="_blank" href="<?php echo $row['github'] ?>" class="git">GitHub</a>
-                <a target="_blank" href="<?php echo $row['live'] ?>" class="live">Live</a>
-              </div>
-            </div>
-            <?php
-            }
-    
-            $conn->close();
-            ?>
-            
-    </div>
-    <div class="cardBtn">
-      <button id="pre" class="cBtn">
-        <img src="images/upArrow.png" alt="" srcset="" />
-      </button>
-      <button id="nxt" class="cBtn">
-        <img src="images/upArrow.png" alt="" />
-      </button>
+      $sql = "SELECT * FROM projects";
+      $result = $conn->query($sql);
+      while ($row = $result->fetch_assoc()) {
+        ?>
+        <div class="Pcard">
+          <div class="projectPreview">
+            <img src="<?php echo $row['img_path']; ?>" alt="" />
+          </div>
+          <p class="cardTitle"><?php echo strtoupper($row['title']); ?></p>
+          <p class="cardDes">
+            <?php echo $row['description']; ?>
+          </p>
+          <div class="projectLinks">
+            <a target="_blank" href="<?php echo $row['github'] ?>" class="git">GitHub</a>
+            <a target="_blank" href="<?php echo $row['live'] ?>" class="live">Live</a>
+          </div>
+        </div>
+        <?php
+      }
+
+      $conn->close();
+      ?>
+
     </div>
   </div>
   <div id="about" class="pageSegments">
     <a id="navPre" href="#project"><img src="images/upArrow.png" alt="" /></a>
     <a id="navNext" href="#contact"><img src="images/downArrow.png" alt="" /></a>
-    <p class="title">About Me</p>
-    <p class="moreDes">
+    <p class="title reveal">About Me</p>
+    <p class="moreDes reveal2">
       I'm a passionate web developer with a strong foundation in HTML, CSS,
       JavaScript, PHP, and MySQL. I enjoy building responsive, user-friendly
       websites and dynamic web applications that deliver smooth user
@@ -167,52 +151,61 @@
     <br />
     <br />
     <div class="skillsDes">
-      <div class="segments">
-        <p class="segTitle" style="color: #38bdf8">FRONTEND</p>
-        <p class="segDes">
-          I build responsive and user-friendly interfaces using HTML, CSS, and
-          JavaScript, focusing on clean design and smooth user experiences.
-        </p>
+      <div class="reveal2">
+        <div class="segments first">
+          <p class="segTitle" style="color: #38bdf8">FRONTEND</p>
+          <p class="segDes">
+            I build responsive and user-friendly interfaces using HTML, CSS, and
+            JavaScript, focusing on clean design and smooth user experiences.
+          </p>
 
-        <div class="segImg">
-          <img src="images/html5.png" alt="" />
-          <img src="images/css3.png" alt="" />
-          <img src="images/js.png" alt="" />
+          <div class="segImg">
+            <img src="images/html5.png" alt="" />
+            <img src="images/css3.png" alt="" />
+            <img src="images/js.png" alt="" />
+          </div>
         </div>
       </div>
-      <div class="segments">
-        <p class="segTitle" style="color: #a855f7">BACKEND</p>
-        <p class="segDes">
-          I develop server-side applications with PHP, creating dynamic
-          features and connecting front-end interfaces with back-end
-          functionality.
-        </p>
+      <div class="reveal2">
+        <div class="segments second">
+          <p class="segTitle" style="color: #a855f7">BACKEND</p>
+          <p class="segDes">
+            I develop server-side applications with PHP, creating dynamic
+            features and connecting front-end interfaces with back-end
+            functionality.
+          </p>
 
-        <div class="segImg">
-          <img src="images/php.png" alt="" />
+          <div class="segImg">
+            <img src="images/php.png" alt="" />
+          </div>
         </div>
       </div>
-      <div class="segments">
-        <p class="segTitle" style="color: #22c55e">DATABASE</p>
-        <p class="segDes">
-          I use MySQL to design and manage databases, perform CRUD operations,
-          and ensure efficient data storage and retrieval
-        </p>
-        <div class="segImg">
-          <img src="images/mysql.png" alt="" />
+      <div class="reveal2">
+        <div class="segments third">
+          <p class="segTitle" style="color: #22c55e">DATABASE</p>
+          <p class="segDes">
+            I use MySQL to design and manage databases, perform CRUD operations,
+            and ensure efficient data storage and retrieval
+          </p>
+          <div class="segImg">
+            <img src="images/mysql.png" alt="" />
+          </div>
         </div>
       </div>
+
     </div>
+
+
   </div>
   <div id="contact" class="pageSegments">
     <a id="navPre" href="#about"><img src="images/upArrow.png" alt="" /></a>
-    <p class="title">
+    <p class="title reveal">
       GET <span class="title" style="color: #60a5fa">IN TOUCH</span>
     </p>
-    <p class="subDes">
+    <p class="subDes reveal2">
       Have an idea or project? Feel free to send me a message.
     </p>
-    <form id="contact-form" action="https://api.w3forms.com/submit" method="POST">
+    <form class="reveal3" id="contact-form" action="https://api.w3forms.com/submit" method="POST">
       <input value="w3f_5dca78e3c61daa1e5deb757de67039f5032715afdb4c95d0" type="hidden" name="access_key" />
       <label for="name">Name</label>
       <input type="text" name="name" id="name" required placeholder="Your Name" />
@@ -226,6 +219,8 @@
     </form>
   </div>
   <script src="script.js"></script>
+
+ 
 </body>
 
 </html>

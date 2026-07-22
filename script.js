@@ -45,86 +45,23 @@ async function type() {
 
 type();
 
-const slider = document.querySelectorAll(".Pcard");
-console.log(slider);
-const pre = document.querySelector("#pre");
-const next = document.querySelector("#nxt");
-let currItem = Math.floor(slider.length / 2);
-console.log(currItem);
-
-function sliderShow() {
-  slider[currItem].style.transform = `scale(1) perspective(20px)`;
-  slider[currItem].style.zIndex = "1";
-  slider[currItem].style.filter = "brightness(100%)";
-  slider[currItem].style.opacity = 1;
-
-  let counter = 0;
-
-  for (i = currItem + 1; i < slider.length; i++) {
-    counter++;
-    console.log(counter);
-
-    slider[i].style.transform =
-      `translate(${140 * counter}px,0%) scale(${1 - 0.2 * counter}) perspective(30px) rotateY(-1deg)`;
-    slider[i].style.zIndex = `${-counter}`;
-    slider[i].style.filter = "brightness(70%)";
-    slider[i].style.opacity = counter > 2 ? 0 : 1;
-  }
-
-  counter = 0;
-
-  for (i = currItem - 1; i >= 0; i--) {
-    counter++;
-    slider[i].style.transform =
-      `translate(${-140 * counter}px,0%) scale(${1 - 0.2 * counter}) perspective(30px) rotateY(1deg)`;
-
-    slider[i].style.zIndex = `${-counter}`;
-    slider[i].style.filter = "brightness(70%)";
-    slider[i].style.opacity = counter > 2 ? 0 : 1;
-  }
-}
-pre.onclick = () => {
-  if (currItem != 0) {
-    currItem--;
-    sliderShow();
-  }
-};
-next.onclick = () => {
-  if (currItem != slider.length - 1) {
-    currItem++;
-    sliderShow();
-    console.log(currItem);
-  }
-};
-
-sliderShow();
 
 const loginForm = document.querySelector(".loginForm");
-const registerForm = document.querySelector(".registerForm");
-document.querySelectorAll(".closePopUp").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelector(".loginPopUp").style.display = "none";
+document.querySelector(".closePopUp").addEventListener('click',()=>{
+  document.querySelector(".loginPopUp").style.display = "none";
     loginForm.reset();
-    registerForm.reset();
-  });
-});
+})
 
 document.getElementById("login").addEventListener("click", () => {
   document.querySelector(".loginPopUp").style.display = "flex";
 });
 
-document.getElementById("openLogin").addEventListener("click", () => {
-  registerForm.style.display = "none";
-  registerForm.reset();
-  loginForm.style.display = "flex";
+
+window.addEventListener("pageshow", () => {
+    document.querySelector(".loginForm").reset();
 });
 
-document.getElementById("openRegister").addEventListener("click", () => {
-  loginForm.style.display = "none";
-  loginForm.reset();
-  registerForm.style.display = "flex";
-});
-
+// W3 FORM
 (function () {
   var form = document.getElementById("contact-form");
   if (!form) return;
@@ -163,3 +100,48 @@ document.getElementById("openRegister").addEventListener("click", () => {
     }
   });
 })();
+
+
+
+
+document.body.classList.add("loading");
+const loader = document.getElementById("loaderContainer");
+
+document.body.classList.add("loading");
+window.addEventListener("load", () => {
+
+    loader.classList.add("hide");
+
+    setTimeout(() => {
+
+        loader.remove();
+        document.body.classList.remove("loading");
+
+        // Start reveal animations here
+        startRevealAnimations();
+
+    }, 250); // Match the CSS transition duration
+
+});
+
+
+function startRevealAnimations() {
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+
+        });
+
+    }, {
+        threshold: 0.2
+    });
+
+    document.querySelectorAll(".reveal, .reveal2, .reveal3")
+        .forEach(el => observer.observe(el));
+
+}
